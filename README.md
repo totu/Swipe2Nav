@@ -18,8 +18,8 @@ I reviewed the implementation and there was nothing malicious about it (at least
 The original was released under MIT license, so I could have forked it, but I wanted to make the logic simpler which made rewrite a better option than simple refactoring.
 
 
-[0] https://addons.mozilla.org/en-US/firefox/addon/touchpadswipelikemac/
-[1] https://github.com/koseduhemak/touchpadswipe
+ - [0] https://addons.mozilla.org/en-US/firefox/addon/touchpadswipelikemac/
+ - [1] https://github.com/koseduhemak/touchpadswipe
 
 
 
