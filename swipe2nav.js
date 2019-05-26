@@ -23,16 +23,20 @@ const figureoutDirection = function(event)
     const deltaY = event.deltaY;
     let direction = NaN;
 
-    // Check we are horizontal scrolling and not vertically
-    if (Math.abs(deltaX) > 0 && Math.abs(deltaY) == 0)
+    // Check we are at either horizontal edge of the page
+    if (window.scrollX <= 0 || Math.ceil(window.scrollX) >= window.scrollMaxX)
     {
-        // Go forwards
-        if (deltaX > 0)
-            direction = 1;
+        // Check we are horizontal scrolling and not vertically
+        if (Math.abs(deltaX) > 0 && Math.abs(deltaY) == 0)
+        {
+            // Go forwards
+            if (deltaX > 0)
+                direction = 1;
 
-        // Go forwards
-        else if (deltaX < 0)
-            direction = -1;
+            // Go forwards
+            else if (deltaX < 0)
+                direction = -1;
+        }
     }
 
     return direction;
