@@ -59,8 +59,6 @@ const navigate = function(event)
                 timeout = true;
                 // Navigate
                 history.go(goDir);
-                //// console.log(goDir);
-                //// console.log(movement);
                 // Re-enable navigation after 500ms to prevent accidental gestures
                 setTimeout(function() { enableNav() }, 500);
             }
