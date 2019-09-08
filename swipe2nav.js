@@ -1,5 +1,5 @@
 // Released under MIT License
-var sensitivity = 25;
+var sensitivity = 50;
 var timeout = false;
 var movement = 0;
 var clearMovementTimer = null;
