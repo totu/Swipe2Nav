@@ -1,6 +1,8 @@
 # Swipe2Nav
 Firefox Add-on to enable two-finger left and right gestures to navigate browser history
 
+### You can get the addon [here](https://addons.mozilla.org/en-US/firefox/addon/swipetonavigate/)
+
 ## Why?
 
 I found out that by default on Windows 10 (at least) Firefox (at least) does not support two finger swip to right or left to navigate through browser history. This led me to create my own add-on for this purpose.
