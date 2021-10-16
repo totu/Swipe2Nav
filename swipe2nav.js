@@ -23,8 +23,25 @@ const figureoutDirection = function(event)
     const deltaY = event.deltaY;
     let direction = NaN;
 
+    const isAtEdge = $el => $el.scrollLeft() <= 0 || $el.scrollLeft() + $el.outerWidth() >= $el[0].scrollWidth;
+
+    // We start from the element under the mouse pointer (event.target),
+    // and move up the DOM tree, looking for an element that is not at
+    // the scroll edge (ie. can be scrolled leftward or rightward). If
+    // such an element exists, then we want to fail the if condition below
+    // and return NaN so that we scroll instead of going back. In this case,
+    // at the end of the loop `el` will be the element that can be scrolled.
+    let el = event.target;
+    let atEdge = true;
+    while(el !== null)
+    {
+        atEdge = isAtEdge($(el));
+        if(!atEdge) break;
+        el = el.parentElement;
+    }
+
     // Check we are at either horizontal edge of the page
-    if (window.scrollX <= 0 || Math.ceil(window.scrollX) >= window.scrollMaxX)
+    if (atEdge)
     {
         // Check we are horizontal scrolling and not vertically
         if (Math.abs(deltaX) > 0 && Math.abs(deltaY) == 0)
@@ -37,6 +54,21 @@ const figureoutDirection = function(event)
             else if (deltaX < 0)
                 direction = -1;
         }
+    }
+
+    // If we just hit the edge of something being scrolled right
+    // after this, we want a little timeout so the user has time
+    // to stop scrolling at the leftmost/rightmost part.
+    if(el && !isAtEdge($(el)))
+    {
+        timeout = true;
+        // This timeout is a bit longer since it takes the user
+        // a short while to realize that they're at the edge and
+        // stop scrolling.
+        setTimeout(() => {
+            timeout = false;
+        }, 2000);
+        direction = NaN;
     }
 
     return direction;
