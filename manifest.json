@@ -9,6 +9,18 @@
       "matches": ["*://*/*"]
     }
   ],
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "permissions": ["storage"],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "swipe2nav@localhost"
+    }
+  },
   "description": "Add two finger swip for navigating browser history.",
   "name": "SwipeToNavigate",
   "version": "0.2.0",
