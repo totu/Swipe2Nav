@@ -3,6 +3,7 @@ var sensitivity = 50;
 var timeout = false;
 var movement = 0;
 var clearMovementTimer = null;
+let getSensitivity = browser.storage.local.get("sensitivity").then(s => sensitivity = s.sensitivity, e => console.error(e));
 
 // Modify movement variable and handle its reset
 const handleMovement = function(direction)
