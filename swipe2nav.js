@@ -5,6 +5,7 @@ var movement = 0;
 var clearMovementTimer = null;
 var forceDisable = false;
 var pinchZoomScale = 1;
+let getSensitivity = browser.storage.local.get("sensitivity").then(s => sensitivity = s.sensitivity, e => console.error(e));
 
 // Modify movement variable and handle its reset
 const handleMovement = function(direction)
