@@ -3,6 +3,8 @@ var sensitivity = 50;
 var timeout = false;
 var movement = 0;
 var clearMovementTimer = null;
+var forceDisable = false;
+var pinchZoomScale = 1;
 let getSensitivity = browser.storage.local.get("sensitivity").then(s => sensitivity = s.sensitivity, e => console.error(e));
 
 // Modify movement variable and handle its reset
@@ -79,6 +81,9 @@ const figureoutDirection = function(event)
 // Main navigation function
 const navigate = function(event)
 {
+    // Do nothing when forceDisable is true
+    if (forceDisable) return;
+    
     // Event is scroll event from jquery.mousewheel
     goDir = figureoutDirection(event);
     // If direction is set disable scroll navigation and go
@@ -104,9 +109,22 @@ const navigate = function(event)
 }
 
 
+// Temporary solution to https://github.com/totu/Swipe2Nav/issues/11
+// Disable functionality in pinch-zoom state 
+function handleResize() 
+{
+    pinchZoomScale = window.visualViewport.scale;
+    forceDisable = (pinchZoomScale > 1);
+}   
+
 // Enable addon functionality
 const enableNav = function()
 {
+    // Detect initial pinch zoom state
+    handleResize();
+    // Hook handle resize function to detect pinch zoom
+    window.visualViewport.addEventListener('resize', handleResize);
+
     // Hook navigate function to mouse movement
     $(document).on('mousewheel', navigate);
     // Reset timeout boolean
